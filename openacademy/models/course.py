@@ -13,3 +13,4 @@ class Course(models.Model):
         string="Descricao"
     )
 
+
