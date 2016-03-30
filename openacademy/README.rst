@@ -12,7 +12,7 @@ and allow you to ...
 Installation
 ============
 
-To install this module, you need to:
+To install this module, you need to: asd
 
 #. Do this ...
 
