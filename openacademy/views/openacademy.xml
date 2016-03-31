@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © <YEAR(S)> <AUTHOR(S)>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+    <data>
+        <menuitem id="openacademy_course_menu_root"
+                  name="Open Academy"
+                  sequence="1" />
+
+
+        <menuitem id="openacademy_course_menu"
+                  name="Open Academy"
+                  sequence="1"
+                  parent="openacademy_course_menu_root"
+                  />
+
+
+        <record model="ir.actions.act_window" id="openacademy_course_action">
+                <field name="name">Course</field>
+                <field name="res_model">openacademy.course</field>
+                <field name="view_mode">tree,form</field>
+                <field name="help" type="html">
+                      <p class="oe_view_nocontent_create">
+                        Click to define a curso.
+                      </p><p>
+                        You must define a product for everything you sell, whether it's
+                        a physical product, a consumable or a service you offer to
+                        customers.
+                      </p><p>
+                        The product form contains information to simplify the sale
+                        process: price, notes in the quotation, accounting data,
+                        procurement methods, etc.
+                      </p>
+                </field>
+        </record>
+
+        <menuitem id="openacademy_course_menu_item"
+                  name="Courses" sequence="1"
+                  parent="openacademy_course_menu"
+                  action="openacademy_course_action"
+        />
+
+        <!-- tree do model course-->
+        <record model="ir.ui.view" id="openacademy_course_view_tree">
+            <field name="name">openacademy.course.tree</field>
+            <field name="model">openacademy.course</field>
+            <field name="type">tree</field>  <!-- tree,form,calendar,search,graph,gantt -->
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <tree string="Meus Cursos">
+                    <field name="name"/>
+                    <field name="responsible_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- form do model course-->
+        <record model="ir.ui.view" id="openacademy_course_view_form">
+            <field name="name">openacademy.course.form</field>
+            <field name="model">openacademy.course</field>
+            <field name="type">form</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form string="Meus Cursos">
+                    <sheet>
+
+                    <div class="oe_title">
+                        <label for="name"
+                               class="oe_edit_only"
+                               string="Course name" />
+                        <h1><field name="name"/></h1>
+                        <field name="responsible_id"/>
+                    </div>
+
+                    <separator string="..." colspan="2" />
+
+                    <notebook>
+                        <page string="Descriçaoo">
+                            <group colspan="2" col="2">
+                                <field nolabel="1" name="description" placeholder="Course description..." />
+                            </group>
+                        </page>
+                        <page string="Sessions">
+                                <field name="session_ids" />
+                        </page>
+                    </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action do session-->
+        <record model="ir.actions.act_window" id="openacademy_session_action">
+                <field name="name">Session</field>
+                <field name="res_model">openacademy.session</field>
+                <field name="view_mode">tree,form</field>
+                <field name="help" type="html">
+                      <p class="oe_view_nocontent_create">
+                        Click to define a session.
+                      </p><p>
+                        You must define a product for everything you sell, whether it's
+                        a physical product, a consumable or a service you offer to
+                        customers.
+                      </p><p>
+                        The product form contains information to simplify the sale
+                        process: price, notes in the quotation, accounting data,
+                        procurement methods, etc.
+                      </p>
+                </field>
+        </record>
+
+        <!-- Menu de Navegaçao do session-->
+        <menuitem id="openacademy_session_menu_item"
+                  name="Session" sequence="3"
+                  parent="openacademy_course_menu"
+                  action="openacademy_session_action"
+        />
+
+
+        <!-- tree do session-->
+         <record model="ir.ui.view" id="openacademy_session_view_tree">
+            <field name="name">openacademy.course.session</field>
+            <field name="model">openacademy.session</field>
+            <field name="type">tree</field>  <!-- tree,form,calendar,search,graph,gantt -->
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <tree string="Sessions">
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field string="Instrutor" name="instructor_id" />
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- form do model session -->
+        <record model="ir.ui.view" id="openacademy_session_view_form">
+            <field name="name">openacademy.session.form</field>
+            <field name="model">openacademy.session</field>
+            <field name="type">form</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form>
+
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                        <field string="Instrutor" name="instructor_id" />
+                    </div>
+
+                    <separator string="_________" colspan="2" />
+
+                    <notebook>
+                        <page string="Descriçao">
+                            <group colspan="2" col="2">
+                                <field name="start_date"  />
+                                <field name="course_id"  />
+
+                            </group>
+                        </page>
+                        <page string="Outras informaçoes">
+                                <field name="description"  />
+                        </page>
+                    </notebook>
+
+                </form>
+            </field>
+        </record>
+
+
+
+        <!-- Action do attendee-->
+        <record model="ir.actions.act_window" id="openacademy_attendee_action">
+                <field name="name">Attendee</field>
+                <field name="res_model">openacademy.attendee</field>
+                <field name="view_mode">tree,form</field>
+                <field name="help" type="html">
+                      <p class="oe_view_nocontent_create">
+                        Click to define a session.
+                      </p><p>
+                        You must define a product for everything you sell, whether it's
+                        a physical product, a consumable or a service you offer to
+                        customers.
+                      </p><p>
+                        The product form contains information to simplify the sale
+                        process: price, notes in the quotation, accounting data,
+                        procurement methods, etc.
+                      </p>
+                </field>
+        </record>
+
+        <!-- Menu de Navegaçao do attendee-->
+        <menuitem id="openacademy_attendee_menu_item"
+                  name="Attendee" sequence="2"
+                  parent="openacademy_course_menu"
+                  action="openacademy_attendee_action"
+        />
+
+
+        <record id="openacademy_res_partner_view_form" model="ir.ui.view">
+                    <field name="name">openacademy.res.partner.view.form</field>
+                    <field name="model">openacademy.respartner</field>
+                    <field name="inherit_id" ref="base.view_partner_form"/>
+                    <field name="arch" type="xml">
+                        <field name="title" position="after">
+                            <field name="is_instructor" />
+                        </field>
+                    </field>
+        </record>
+
+    </data>
+</openerp>

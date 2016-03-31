@@ -3,17 +3,35 @@ from openerp import models, fields, api
 
 class course(models.Model):
 
-    _name = "course.course"
+
+    _name = "openacademy.course"
     _description = "Course"
-    _title = "Cousera"
+
 
     name = fields.Char(
-        string="Name"
+        string="Titulo",
+        required=True
     )
 
-    title = fields.Char(
-        string="Titulo"
-    )
-    description = fields.Text(
+    description = fields.Char(
         string="Descricao"
     )
+
+
+
+    responsible_id = fields.Many2one('res.users')
+
+    session_ids = fields.One2many('openacademy.session', 'name')
+
+    display_name = fields.Char(compute='_compute_display_name')
+
+
+    session_ids = fields.One2many('openacademy.session', 'course_id')
+
+    @api.one
+    @api.depends('name', 'description')     # this definition is recursive
+    def _compute_display_name(self):
+        if self.description:
+            self.display_name = self.name   + ' / ' + self.description
+        else:
+            self.display_name = self.name
