@@ -18,5 +18,8 @@
     "depends": [
         "base",
     ],
+    "data": [
+        "views/openacademy.xml",
+    ]
 
 }
