@@ -19,8 +19,9 @@ class session (models.Model):
 
     instructor_id = fields.Many2one(
         'res.partner',
-        domain=[()]
-    )
+        string="Instructor",
+        domain=['|',('is_instructor', '=', True),('teacher_category', 'ilike', 'teacher')])
+    #'|',('is_instructor', '=', True),
 
     course_id = fields.Many2one('openacademy.course')
     attendee_ids = fields.One2many('openacademy.attendee', 'name')
@@ -29,10 +30,11 @@ class session (models.Model):
     duration = fields.Integer()
     seats = fields.Integer()
 
-    teacher_category = fields.Selection (
-        selection=[
-            ('leval1', 'Level 1'),
-            ('leval2', 'Level 2'),
-        ],
-        string='Teacher Category',
-    )
+
+#    teacher_category = fields.Selection (
+#        selection=[
+#            ('leval1', 'Level 1'),
+#            ('leval2', 'Level 2'),
+#        ],
+#        string='Teacher Category',
+#    )

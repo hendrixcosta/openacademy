@@ -197,18 +197,49 @@
                   action="openacademy_attendee_action"
         />
 
-
+        <!-- Menu herdade de res_partner
         <record id="openacademy_res_partner_view_form" model="ir.ui.view">
                     <field name="name">openacademy.res.partner.view.form</field>
                     <field name="model">openacademy.respartner</field>
                     <field name="inherit_id" ref="base.view_partner_form"/>
                     <field name="arch" type="xml">
-                        <field name="title" position="after">
-                            <field name="is_instructor" />
+                        <field name="title" position="before">
+                            <field name="street" />
                         </field>
                     </field>
         </record>
+        -->
 
+         <record model="ir.ui.view" id="partner_openacademy_form_view">
+            <field name="name">partner.instructor</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Open Academy">
+                        <group>
+                            <field name="is_instructor"  />
+                            <field name="teacher_category" />
+                        </group>
+                        <group>
+                            <field name="session_ids" />
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+
+         <record model="ir.ui.view" id="session_filter_view">
+            <field name="name">Sessions Search</field>
+            <field name="model">openacademy.session</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <filter name="my_sessions" string="My Sessions" />
+                </search>
+            </field>
+        </record>
 
 
 
